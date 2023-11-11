@@ -1,11 +1,12 @@
-import styled from "styled-components";
-import {LoginTemplate} from "../index"
-export function Login() {
+import React from 'react'
+import LoginTemplate from '../components/templates/LoginTemplate'
 
+const Login = () => {
   return (
-    <>
-    <LoginTemplate />
-    </>
-  );
+    <div>
+      <LoginTemplate/>
+    </div>
+  )
 }
-const Container = styled.div``;
+
+export default Login
