@@ -1,10 +1,20 @@
 import { createContext, useState } from "react";
-import { AuthContextProvider, Dark, Device, Light, MenuHambur, MyRoutes, Sidebar } from "./index";
+import {
+  AuthContextProvider,
+  Dark,
+  Device,
+  Light,
+  MenuHambur,
+  MyRoutes,
+  Sidebar,
+} from "./index";
 import styled, { ThemeProvider } from "styled-components";
+import { useLocation } from "react-router-dom";
 
 export const ThemeContext = createContext(null);
 
 function App() {
+  const { pathname } = useLocation();
   const [theme, setTheme] = useState("dark");
   const themeStyle = theme === "light" ? Light : Dark;
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -14,17 +24,21 @@ function App() {
       <ThemeContext.Provider value={{ setTheme, theme }}>
         <ThemeProvider theme={themeStyle}>
           <AuthContextProvider>
-            <Container>
-              <div className="ContentSidebar">
-                <Sidebar state={sidebarOpen} setState={setSidebarOpen}/>
-              </div>
-              <div className="contentMenuHambur">
-                <MenuHambur/>
-              </div>
-              <ContainerBody>
-                <MyRoutes />
-              </ContainerBody>
-            </Container>
+            {pathname != "/login" ? (
+              <Container>
+                <div className="ContentSidebar">
+                  <Sidebar state={sidebarOpen} setState={setSidebarOpen} />
+                </div>
+                <div className="contentMenuHambur">
+                  <MenuHambur />
+                </div>
+                <ContainerBody>
+                  <MyRoutes />
+                </ContainerBody>
+              </Container>
+            ) : (
+              <MyRoutes />
+            )}
           </AuthContextProvider>
         </ThemeProvider>
       </ThemeContext.Provider>
@@ -34,37 +48,35 @@ function App() {
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns:1fr;
-  background:${(props)=>props.theme.bgtotal};
+  grid-template-columns: 1fr;
+  background: ${(props) => props.theme.bgtotal};
 
-  .ContentSidebar{
-    display:none;
+  .ContentSidebar {
+    display: none;
   }
-  .ContentMenuHambur{
-    display:block;
-    position:absolute;
-    left:20px;
+  .ContentMenuHambur {
+    display: block;
+    position: absolute;
+    left: 20px;
   }
-  
-  @media ${Device.tablet}{
+
+  @media ${Device.tablet} {
     grid-template-columns: 65px 1fr;
-    
-    .ContentSidebar{
-      display:initial;
-    }
-    .ContentMenuHambur{
-      display:none;
-    }
 
+    .ContentSidebar {
+      display: initial;
+    }
+    .ContentMenuHambur {
+      display: none;
+    }
   }
-  `;
+`;
 
 const ContainerBody = styled.div`
   width: 100%;
   grid-column: 1;
-  @media ${Device.tablet}{
+  @media ${Device.tablet} {
     grid-column: 2;
-  
   }
 `;
 

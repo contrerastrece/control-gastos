@@ -2,10 +2,10 @@ import React from 'react'
 import styled from 'styled-components';
 import { Icono } from '../../index';
 
-const BtnSave = ({funcion,titulo,bgColor,icono}) => {
+const BtnSave = ({funcion,titulo,bgcolor,icono}) => {
   return (
     
-    <Container type='submit' $bgColor={bgColor}>
+    <Container type='submit' $bgcolor={bgcolor}>
       <Icono>{icono}</Icono>
       <span className='btn' onClick={funcion}>{titulo}</span>
     </Container>
@@ -18,9 +18,10 @@ const Container=styled.button`
   text-decoration:none;
   border:none;
   gap:1em;
-  background:initial;
+  background-color:initial;
+  z-index:2;
   .btn{
-    background-color:${(props)=>props.$bgColor};
+    background:${(props)=>props.$bgcolor};
     padding:0.6em 1.3em;
     font-weight:900;
     font-size:1.5em;

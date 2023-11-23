@@ -6,20 +6,20 @@ const LoginTemplate = () => {
 const {signInWithGoogle}=useAuthStore()
 
   return (
-    <Container imgfondo={v.imagenfondo}>
+    <Container $imgfondo={v.imagenfondo}>
       <div className="contentCard">
         <h1>LoginTemplate</h1>
         <div className="contentImg">
           <img src={v.logo} alt="" />
         </div>
-        <BtnSave titulo={"Soy un botn"} icono={<v.iconogoogle />} bgColor={v.colorSecundario} funcion={signInWithGoogle}/>
+        <BtnSave titulo={"Login with Google"} icono={<v.iconogoogle />} bgcolor={v.colorSecundario} funcion={signInWithGoogle}/>
       </div>
     </Container>
   );
 };
 
 const Container = styled.div`
-  background-image: url(${(props)=>props.imgfondo});
+  background-image: url(${(props)=>props.$imgfondo});
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
