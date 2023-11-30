@@ -8,12 +8,13 @@ import {
   useUsuariosStore,
   TemasData,
   v,
-  BtnSave,
+  BtnSave
 } from "../../index";
 const ConfigurationTemplate = () => {
   const { datausuarios, editartemamonedauser } = useUsuariosStore();
+  
   const [select, setSelect] = useState([]);
-  const [selectTema, setSelecttema] = useState([]);
+  const [selectTema, setSelectTema] = useState([]);
   const [state, setState] = useState(false);
   const [stateListaPaises, setStateListaPaises] = useState(false);
   const [stateListaTemas, setStateListaTemas] = useState(false);
@@ -22,15 +23,27 @@ const ConfigurationTemplate = () => {
   const moneda = select.symbol ? select.symbol : datausuarios.currency;
   const pais = select.countryName ? select.countryName : datausuarios.country;
   const paisSeleccionado = "🐷 " + moneda + " " + pais;
-  console.log(datausuarios);
+  console.log(datausuarios,'👀');
   //Tema
-  const iconobd = datausuarios.tema === "0" ? "🌞" : "🌚";
-  const temabd = datausuarios.tema === "0" ? "light" : "dark";
+  const iconobd = datausuarios.theme === "0" ? "🌞" : "🌚";
+  const temabd = datausuarios.theme === "0" ? "light" : "dark";
   const temainicial = selectTema.tema ? selectTema.tema : temabd;
   const iconoinicial = selectTema.icono ? selectTema.icono : iconobd;
   const temaSeleccionado = iconoinicial + " " + temainicial;
 
   // editar
+  const editar=async()=>{
+    const temaElegido=selectTema.descripcion==="light"?"0":"1";
+    const p={
+      theme:temaElegido,
+      currency:moneda,
+      country:pais,
+      id:datausuarios.id
+    }
+
+    await editartemamonedauser(p)
+  }
+
 
   return (
     <Container>
@@ -73,7 +86,7 @@ const ConfigurationTemplate = () => {
             <ListaGenerica
               data={TemasData}
               setState={() => setStateListaTemas(!stateListaTemas)}
-              funcion={setSelecttema}
+              funcion={setSelectTema}
             />
           )}
         </ContentCard>
@@ -81,7 +94,7 @@ const ConfigurationTemplate = () => {
           titulo="Guardar"
           bgcolor={v.colorselector}
           icono={<v.iconoguardar />}
-          // funcion={editar}
+          funcion={editar}
         />
       </section>
       <section className="main"></section>

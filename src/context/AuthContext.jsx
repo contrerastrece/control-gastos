@@ -15,12 +15,12 @@ export const AuthContextProvider = ({ children }) => {
           setUser(session?.user.user_metadata);
           insertarUsuarios(session?.user.user_metadata, session?.user.id);
           // console.log("event", event);
-          console.log("session", session?.user.user_metadata);
+          // console.log("session", session?.user);
         }
       }
     );
 
-    console.log(authListener);
+    // console.log(authListener);
 
     return () => {
       authListener.subscription;

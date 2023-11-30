@@ -7,21 +7,31 @@ import {
   MenuHambur,
   MyRoutes,
   Sidebar,
+  useUsuariosStore,
 } from "./index";
 import styled, { ThemeProvider } from "styled-components";
 import { useLocation } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 export const ThemeContext = createContext(null);
 
 function App() {
+  const { mostrarUsuarios, datausuarios } = useUsuariosStore();
+
+
   const { pathname } = useLocation();
-  const [theme, setTheme] = useState("dark");
+  // const [theme, setTheme] = useState("dark");
+  const theme =datausuarios?.theme==="0"?"light":"dark";
   const themeStyle = theme === "light" ? Light : Dark;
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+
+  const { isLoading, error } = useQuery({queryKey:["mostrar usuarios"],queryFn: () =>
+  mostrarUsuarios()}
+);
   return (
     <>
-      <ThemeContext.Provider value={{ setTheme, theme }}>
+      <ThemeContext.Provider value={{ theme }}>
         <ThemeProvider theme={themeStyle}>
           <AuthContextProvider>
             {pathname != "/login" ? (

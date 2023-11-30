@@ -1,11 +1,11 @@
 import { create } from "zustand";
-import { EditarTemaMonedaUser, MostrarUsuarios } from "../index";
+import { EditarTemaMonedaUser, Mostrar_usuarios } from "../index";
 
 export const useUsuariosStore = create((set, get) => ({
   datausuarios: [],
   
   mostrarUsuarios: async () => {
-    const response = await MostrarUsuarios();
+    const response = await Mostrar_usuarios();
     set({ datausuarios: response });
     if(response){
       return response
