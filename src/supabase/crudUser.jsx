@@ -18,17 +18,17 @@ export const Mostrar_usuarios = async () => {
       .from("usuarios")
       .select()
       .eq("id_auth_supabase", idAuthSupabase);
-    if (error) {
-      console.error("MostrarUsuarios:", error);
-      throw new Error("Error al obtener datos de usuarios");
-    }
+    // if (error) {
+    //   console.error("MostrarUsuarios:", error);
+    //   throw new Error("Error al obtener datos de usuarios");
+    // }
     if (data) {
       console.log(data,'👀');
       return data[0];
     }
   } catch (error) {
-    console.error("MostrarUsuarios:", error);
-    throw new Error(error.error_description || error.message || "Error al mostrar usuarios");
+    // console.error("MostrarUsuarios:", error);
+    // throw new Error(error.error_description || error.message || "Error al mostrar usuarios");
 
   }
 };

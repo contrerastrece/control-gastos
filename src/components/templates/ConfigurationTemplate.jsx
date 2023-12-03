@@ -8,11 +8,11 @@ import {
   useUsuariosStore,
   TemasData,
   v,
-  BtnSave
+  BtnSave,
 } from "../../index";
 const ConfigurationTemplate = () => {
   const { datausuarios, editartemamonedauser } = useUsuariosStore();
-  
+
   const [select, setSelect] = useState([]);
   const [selectTema, setSelectTema] = useState([]);
   const [state, setState] = useState(false);
@@ -23,27 +23,26 @@ const ConfigurationTemplate = () => {
   const moneda = select.symbol ? select.symbol : datausuarios.currency;
   const pais = select.countryName ? select.countryName : datausuarios.country;
   const paisSeleccionado = "🐷 " + moneda + " " + pais;
-  console.log(datausuarios,'👀');
+  console.log(datausuarios, "👀");
   //Tema
   const iconobd = datausuarios.theme === "0" ? "🌞" : "🌚";
   const temabd = datausuarios.theme === "0" ? "light" : "dark";
-  const temainicial = selectTema.tema ? selectTema.tema : temabd;
+  const temainicial = selectTema.descripcion ? selectTema.descripcion : temabd;
   const iconoinicial = selectTema.icono ? selectTema.icono : iconobd;
   const temaSeleccionado = iconoinicial + " " + temainicial;
 
   // editar
-  const editar=async()=>{
-    const temaElegido=selectTema.descripcion==="light"?"0":"1";
-    const p={
-      theme:temaElegido,
-      currency:moneda,
-      country:pais,
-      id:datausuarios.id
-    }
+  const editar = async () => {
+    const temaElegido = selectTema.descripcion === "light" ? "0" : "1";
+    const p = {
+      theme: temaElegido,
+      currency: moneda,
+      country: pais,
+      id: datausuarios.id,
+    };
 
-    await editartemamonedauser(p)
-  }
-
+    await editartemamonedauser(p);
+  };
 
   return (
     <Container>
@@ -53,11 +52,10 @@ const ConfigurationTemplate = () => {
         />
       </header>
 
-      <section className="area1">
-        <h2>AJUSTES</h2>
-      </section>
+     
 
       <section className="area2">
+        <h2>AJUSTES</h2>
         <ContentCard>
           <span>Moneda:</span>
           <Selector
@@ -97,7 +95,6 @@ const ConfigurationTemplate = () => {
           funcion={editar}
         />
       </section>
-      <section className="main"></section>
     </Container>
   );
 };
@@ -111,35 +108,30 @@ const Container = styled.div`
   display: grid;
   grid-template:
     "header" 100px
-    "area1" 100px
-    "area2" 50px
-    "main" auto;
+
+    "area2" auto;
 
   .header {
     grid-area: header;
-    background-color: rgba(103, 93, 241, 0.14);
+    /* background-color: rgba(103, 93, 241, 0.14); */
     display: flex;
     align-items: center;
   }
-  .area1 {
-    grid-area: area1;
-    background-color: rgba(229, 67, 26, 0.14);
-    display: flex;
-    align-items: center;
-  }
+
   .area2 {
     grid-area: area2;
-    background-color: rgba(77, 237, 106, 0.14);
+    /* background-color: rgba(77, 237, 106, 0.14); */
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: start;
     gap: 2rem;
+    align-self:center;
+    h2{
+      font-size:3rem;
+    }
   }
-  .main {
-    grid-area: main;
-    background-color: rgba(179, 46, 241, 0.14);
-  }
+
 `;
 const ContentCard = styled.div`
   display: flex;

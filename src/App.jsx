@@ -4,6 +4,7 @@ import {
   Dark,
   Device,
   Light,
+  Login,
   MenuHambur,
   MyRoutes,
   Sidebar,
@@ -18,17 +19,16 @@ export const ThemeContext = createContext(null);
 function App() {
   const { mostrarUsuarios, datausuarios } = useUsuariosStore();
 
-
   const { pathname } = useLocation();
   // const [theme, setTheme] = useState("dark");
-  const theme =datausuarios?.theme==="0"?"light":"dark";
+  const theme = datausuarios?.theme === "0" ? "light" : "dark";
   const themeStyle = theme === "light" ? Light : Dark;
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-
-  const { isLoading, error } = useQuery({queryKey:["mostrar usuarios"],queryFn: () =>
-  mostrarUsuarios()}
-);
+  const { isLoading, error } = useQuery({
+    queryKey: ["mostrar usuarios"],
+    queryFn: () => mostrarUsuarios(),
+  });
   return (
     <>
       <ThemeContext.Provider value={{ theme }}>
@@ -47,7 +47,7 @@ function App() {
                 </ContainerBody>
               </Container>
             ) : (
-              <MyRoutes />
+              <Login />
             )}
           </AuthContextProvider>
         </ThemeProvider>

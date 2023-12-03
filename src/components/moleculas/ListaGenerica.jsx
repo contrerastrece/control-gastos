@@ -16,7 +16,7 @@ export const ListaGenerica = ({data,setState,funcion}) => {
         {data.map((item, index) => {
           return (
             <ItemContainer key={index} onClick={()=>seleccionar(item)}>
-              <span>{item.icono}</span>
+              <span>{item.icono} </span>
               <span>{item.descripcion}</span>
             </ItemContainer>
           );
