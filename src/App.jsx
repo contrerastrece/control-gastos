@@ -9,6 +9,7 @@ import {
   MenuHambur,
   MyRoutes,
   Sidebar,
+  SpinerLoader,
   useUsuariosStore,
 } from "./index";
 import styled, { ThemeProvider } from "styled-components";
@@ -30,6 +31,12 @@ function App() {
     queryKey: ["mostrar usuarios"],
     queryFn: () => mostrarUsuarios(),
   });
+
+if(isLoading){
+  return <SpinerLoader/>
+}
+
+
   return (
     <>
       <ThemeContext.Provider value={{ theme }}>

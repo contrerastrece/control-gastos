@@ -7,12 +7,11 @@ export const Insertar_categorias = async (p) => {
       .from("categories")
       .insert(p)
       .select();
-    console.log(data,'👀😂');
     if (error) {
       Swal.fire({
         icon: "error",
         title: "Opps...",
-        text: "Ya existe un registro con " + p.description,
+        text: "Ya existe un registro con " + p.descripcion,
         footer: '<a href="">Agregue una nueva descripcion</a>',
       });
     }
@@ -35,7 +34,7 @@ export const Mostrar_categorias = async (p) => {
     const { data, error } = await supabase
       .from("categories")
       .select()
-      .eq("id_user", p.iduser)
+      .eq("id_user", p.id_user)
       .eq("type", p.type)
       .order("id", { ascending: false });
     // if (error) {
@@ -58,7 +57,7 @@ export const Eliminar_categorias = async (p) => {
     const { error } = await supabase
       .from("categories")
       .delete()
-      .eq("id_user", p.iduser)
+      .eq("id_user", p.id_user)
       .eq("id", p.id);
     if (error) {
       alert("Error al eliminar", error);
@@ -76,7 +75,7 @@ export const Editar_categorias = async (p) => {
     const { error } = await supabase
       .from("categories")
       .update()
-      .eq("id_user", p.iduser)
+      .eq("id_user", p.id_user)
       .eq("id", p.id);
     if (error) {
       alert("Error al Editar", error);

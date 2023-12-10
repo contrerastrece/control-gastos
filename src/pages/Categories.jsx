@@ -1,8 +1,8 @@
 import React from "react";
 import {
   CategoriesTemplate,
-  DataUser,
   useCategoriesStore,
+  useOperation,
   useUsuariosStore,
 } from "../index";
 import styled from "styled-components";
@@ -11,20 +11,15 @@ import { useQuery } from "@tanstack/react-query";
 export const Categories = () => {
   const { dataCategories, showCategories } = useCategoriesStore();
   const { datausuarios } = useUsuariosStore();
-  console.log(dataCategories);
-  console.log(datausuarios);
+  const {type}=useOperation();
+
+
   const { isLoading, isError, data, error } = useQuery({
-    queryKey: ["mostrar categorias"],
+    queryKey: ["mostrar categorias",type],
     queryFn: () =>
-      showCategories({ iduser: datausuarios.id, type:'compras' }),
+      showCategories({ id_user: datausuarios.id, type:type }),
   });
-  if (isLoading) {
-    return <>Cargando</>;
-  }
-  if (isError) {
-    return <>Error...{error.message}</>;
-  }
-  console.log(data,'👀');
+
   return (
     <Container>
       

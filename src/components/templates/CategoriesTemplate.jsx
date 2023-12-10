@@ -13,40 +13,51 @@ import {
 } from "../../index";
 import styled from "styled-components";
 
-export const CategoriesTemplate = ({data}) => {
+export const CategoriesTemplate = ({ data }) => {
   const [state, setState] = useState(false);
   const [stateType, setStateType] = useState(false);
   const [dataSelect, setdataSelect] = useState([]);
   const [openRegistro, SetopenRegistro] = useState(false);
   const [accion, setAccion] = useState("");
 
-  const { titleBtnDesplegable, colorCategory, bgCategory, setType } = useOperation();
+  const { titleBtnDesplegable, colorCategory, bgCategory, setType } =
+    useOperation();
 
   const changeType = (p) => {
     setType(p);
     setStateType(!stateType);
+    setState(false);
   };
 
-  const cerrarDesplegables=()=> {
+  const cerrarDesplegables = () => {
     setStateType(false);
     setState(false);
-  }
-  const openTipo=()=> {
+  };
+  const openTipo = () => {
     setStateType(!stateType);
     setState(false);
-  }
-  const openUser=() =>{
+  };
+  const openUser = () => {
     setState(!state);
     setStateType(false);
-  }
+  };
 
+  const nuevoRegistro=()=>{
+    SetopenRegistro(!openRegistro)
+    setAccion('Nuevo')
+    setdataSelect('')
+  }
   return (
     <Container>
-      <RegistrarCategorias onClose={() => SetopenRegistro(!openRegistro)} accion={accion} dataSelect={dataSelect}/>
-      <header className="header">
-        <Header
-          stateConfig={{ state: state, setState: openUser }}
+      {openRegistro && (
+        <RegistrarCategorias
+          onClose={() => SetopenRegistro(!openRegistro)}
+          accion={accion}
+          dataSelect={dataSelect}
         />
+      )}
+      <header className="header">
+        <Header stateConfig={{ state: state, setState: openUser }} />
       </header>
 
       <section className="area1">
@@ -55,7 +66,7 @@ export const CategoriesTemplate = ({data}) => {
             bgcolor={bgCategory}
             text={titleBtnDesplegable}
             textcolor={colorCategory}
-            funcion={() => setStateType(!stateType)}
+            funcion={openTipo}
           />
           {stateType && (
             <ListaMenuDesplegable
@@ -72,11 +83,12 @@ export const CategoriesTemplate = ({data}) => {
             bgcolor={bgCategory}
             textcolor={colorCategory}
             icono={<v.agregar />}
+            funcion={nuevoRegistro}
           />
         </ContentFilter>
       </section>
       <section className="main">
-        <TablaCategorias data={data}/>
+        <TablaCategorias data={data} SetopenRegistro={SetopenRegistro} setdataSelect={setdataSelect} setAccion={setAccion}/>
       </section>
     </Container>
   );

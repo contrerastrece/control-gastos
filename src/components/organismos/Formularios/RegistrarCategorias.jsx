@@ -37,7 +37,7 @@ export const RegistrarCategorias = ({ onClose, dataSelect, accion }) => {
   const insertar=async(data)=>{
     if(accion==='Editar'){
       const p = {
-        description: data.description,
+        descripcion: data.descripcion,
         color: currentColor,
         icono: emojiselect,
         id: dataSelect.id,
@@ -102,7 +102,7 @@ export const RegistrarCategorias = ({ onClose, dataSelect, accion }) => {
           <section>
             <div>
               <InputText
-                defaultValue={dataSelect.descripcion}
+                defaultValue={dataSelect.description}
                 register={register}
                 placeholder="Descripcion"
                 errors={errors}

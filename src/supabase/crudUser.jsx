@@ -17,14 +17,15 @@ export const Mostrar_usuarios = async () => {
     const { data ,error} = await supabase
       .from("usuarios")
       .select()
-      .eq("id_auth_supabase", idAuthSupabase);
+      .eq("id_auth_supabase", idAuthSupabase)
+      .maybeSingle();
     // if (error) {
     //   console.error("MostrarUsuarios:", error);
     //   throw new Error("Error al obtener datos de usuarios");
     // }
     if (data) {
-      console.log(data,'👀');
-      return data[0];
+      // console.log(data,'👀');
+      return data;
     }
   } catch (error) {
     // console.error("MostrarUsuarios:", error);

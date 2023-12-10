@@ -13,6 +13,7 @@ export * from './components/moleculas/ItemsDesplegable';
 export * from './components/moleculas/ListaGenerica';
 export * from './components/moleculas/ListaMenuDesplegable';
 export * from './components/moleculas/Spiner';
+export * from './components/moleculas/SpinerLoader';
 export * from './components/organismos/DataUser';
 export * from './components/organismos/Formularios/InputText';
 export * from './components/organismos/Formularios/RegistrarCategorias';
