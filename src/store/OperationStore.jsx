@@ -6,6 +6,7 @@ export const useOperation = create((set, get) => ({
   titleBtnDesplegable: "Categorias Ingresos",
   colorCategory: v.colorIngresos,
   bgCategory: v.colorbgingresos,
+  type:'i',
   setType: (p) => {
     set({
       titleBtnDesplegable: p.text

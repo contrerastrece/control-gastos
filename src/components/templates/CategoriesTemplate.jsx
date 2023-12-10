@@ -1,29 +1,86 @@
-import React, { useState } from 'react'
-import { BtnDesplegable, ContentFilters, DataDesplegableTipo, Header, ListaMenuDesplegable, useOperation } from '../../index';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import {
+  BtnDesplegable,
+  BtnFilter,
+  ContentFilters,
+  DataDesplegableTipo,
+  Header,
+  ListaMenuDesplegable,
+  RegistrarCategorias,
+  TablaCategorias,
+  useOperation,
+  v,
+} from "../../index";
+import styled from "styled-components";
 
-export const CategoriesTemplate = () => {  
-    const [state, setState] = useState(false);
-    const {titleBtnDesplegable,colorCategory,bgCategory,setType }=useOperation();
-    return (
-      <Container>
-        <header className="header">
-          <Header
-            stateConfig={{ state: state, setState: () => setState(!state) }}
+export const CategoriesTemplate = ({data}) => {
+  const [state, setState] = useState(false);
+  const [stateType, setStateType] = useState(false);
+  const [dataSelect, setdataSelect] = useState([]);
+  const [openRegistro, SetopenRegistro] = useState(false);
+  const [accion, setAccion] = useState("");
+
+  const { titleBtnDesplegable, colorCategory, bgCategory, setType } = useOperation();
+
+  const changeType = (p) => {
+    setType(p);
+    setStateType(!stateType);
+  };
+
+  const cerrarDesplegables=()=> {
+    setStateType(false);
+    setState(false);
+  }
+  const openTipo=()=> {
+    setStateType(!stateType);
+    setState(false);
+  }
+  const openUser=() =>{
+    setState(!state);
+    setStateType(false);
+  }
+
+  return (
+    <Container>
+      <RegistrarCategorias onClose={() => SetopenRegistro(!openRegistro)} accion={accion} dataSelect={dataSelect}/>
+      <header className="header">
+        <Header
+          stateConfig={{ state: state, setState: openUser }}
+        />
+      </header>
+
+      <section className="area1">
+        <ContentFilters>
+          <BtnDesplegable
+            bgcolor={bgCategory}
+            text={titleBtnDesplegable}
+            textcolor={colorCategory}
+            funcion={() => setStateType(!stateType)}
           />
-        </header>
-        <section className="area1">
-          <ContentFilters>
-            <BtnDesplegable bgcolor={bgCategory} text={titleBtnDesplegable} textcolor={colorCategory}/>
-            <ListaMenuDesplegable data={DataDesplegableTipo} top='115%' funcion={(p)=>setType(p)}/>
-          </ContentFilters>
-        </section>
-        <section className="area2"></section>
-        <section className="main"></section>
-      </Container>
-    );
-  
-}
+          {stateType && (
+            <ListaMenuDesplegable
+              data={DataDesplegableTipo}
+              top="115%"
+              funcion={(p) => changeType(p)}
+            />
+          )}
+        </ContentFilters>
+      </section>
+      <section className="area2">
+        <ContentFilter>
+          <BtnFilter
+            bgcolor={bgCategory}
+            textcolor={colorCategory}
+            icono={<v.agregar />}
+          />
+        </ContentFilter>
+      </section>
+      <section className="main">
+        <TablaCategorias data={data}/>
+      </section>
+    </Container>
+  );
+};
 const Container = styled.div`
   min-height: 100vh;
   padding: 15px;
@@ -54,9 +111,11 @@ const Container = styled.div`
     background-color: rgba(77, 237, 106, 0.14);
     display: flex;
     align-items: center;
+    justify-content: end;
   }
   .main {
     grid-area: main;
     background-color: rgba(179, 46, 241, 0.14);
   }
 `;
+const ContentFilter = styled.div``;

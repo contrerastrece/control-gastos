@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
   AuthContextProvider,
   Dark,
@@ -49,6 +50,7 @@ function App() {
             ) : (
               <Login />
             )}
+            <ReactQueryDevtools initialIsOpen={true} />
           </AuthContextProvider>
         </ThemeProvider>
       </ThemeContext.Provider>
