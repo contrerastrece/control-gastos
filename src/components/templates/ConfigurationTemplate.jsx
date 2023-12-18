@@ -9,6 +9,7 @@ import {
   TemasData,
   v,
   BtnSave,
+  ResetCategories,
 } from "../../index";
 const ConfigurationTemplate = () => {
   const { datausuarios, editartemamonedauser } = useUsuariosStore();
@@ -94,6 +95,7 @@ const ConfigurationTemplate = () => {
           icono={<v.iconoguardar />}
           funcion={editar}
         />
+        <ResetCategories/>
       </section>
     </Container>
   );

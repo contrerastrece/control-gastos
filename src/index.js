@@ -20,6 +20,7 @@ export * from './components/organismos/Formularios/RegistrarCategorias';
 export * from './components/organismos/Header';
 export * from './components/organismos/ListaPaises';
 export { default as MenuHambur } from './components/organismos/MenuHambur';
+export * from './components/organismos/ResetCategories';
 export * from './components/organismos/selectores/Selector';
 export { default as Sidebar } from './components/organismos/sidebar/Sidebar';
 export { default as SidebarCard } from './components/organismos/sidebar/SidebarCard';

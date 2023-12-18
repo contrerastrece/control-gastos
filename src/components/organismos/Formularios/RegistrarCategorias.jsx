@@ -37,7 +37,7 @@ export const RegistrarCategorias = ({ onClose, dataSelect, accion }) => {
   const insertar=async(data)=>{
     if(accion==='Editar'){
       const p = {
-        descripcion: data.descripcion,
+        description: data.descripcion,
         color: currentColor,
         icono: emojiselect,
         id: dataSelect.id,
@@ -65,6 +65,7 @@ export const RegistrarCategorias = ({ onClose, dataSelect, accion }) => {
         setEstadoproceso(true)
         await insertCategories(p)
         setEstadoproceso(false)
+        onClose();
       } catch (error) {
         alert("error ingresar Form");
       }

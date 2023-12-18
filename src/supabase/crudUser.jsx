@@ -13,7 +13,7 @@ export const Insertar_usuarios=async(p)=>{
 export const Mostrar_usuarios = async () => {
   try {
     const idAuthSupabase = await obtenerIdAuthSupabase();
-    console.log(idAuthSupabase)
+    // console.log(idAuthSupabase)
     const { data ,error} = await supabase
       .from("usuarios")
       .select()

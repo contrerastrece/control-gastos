@@ -5,12 +5,15 @@ import {
   Eliminar_categorias,
   Insertar_categorias,
   Mostrar_categorias,
+  Reset_categorias,
 } from "../index";
 
 export const useCategoriesStore = create((set, get) => ({
   dataCategories: [],
+  parametros: {},
   showCategories: async (p) => {
     const response = await Mostrar_categorias(p);
+    set({ parametros: p });
     set({ dataCategories: response });
 
     return response;
@@ -18,12 +21,20 @@ export const useCategoriesStore = create((set, get) => ({
   insertCategories: async (p) => {
     await Insertar_categorias(p);
     const { showCategories } = get();
-    set(showCategories(p));
+    const {parametros}=get()
+    set(showCategories(parametros));
   },
   deleteCategories: async (p) => {
     await Eliminar_categorias(p);
+    const {parametros}=get();
     const { showCategories } = get();
-    set(showCategories(p));
+    set(showCategories(parametros));
+  },
+  resetCategories: async (p) => {
+    await Reset_categorias(p);
+    const {parametros}=get();
+    const { showCategories } = get();
+    set(showCategories(parametros));
   },
   updateCategories: async (p) => {
     await Editar_categorias(p);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import {
   ContentAccionesTabla,
@@ -24,10 +24,10 @@ export const TablaCategorias = ({
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Si, eliminar",
-    }).then(async (result) => {
+    }).then( async (result) => {
       if (result.isConfirmed) {
-        await deleteCategories({ id: p.id, iduser: p.id_user });
-        Swal.fire("Saved!", "", "success");
+        await deleteCategories({ id: p.id, id_user: p.id_user });
+        // Swal.fire("Saved!", "", "success");
       } else {
         Swal.fire("Changes are not saved", "", "info");
       }

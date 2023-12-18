@@ -8,7 +8,7 @@ export const obtenerIdAuthSupabase = async () => {
   if (session != null) {
     const { user } = session;
     const idAuthSupabase = user.id;
-    console.log(user)
+    // console.log(user)
     return idAuthSupabase;
   }
 };

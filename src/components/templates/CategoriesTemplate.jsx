@@ -42,11 +42,11 @@ export const CategoriesTemplate = ({ data }) => {
     setStateType(false);
   };
 
-  const nuevoRegistro=()=>{
-    SetopenRegistro(!openRegistro)
-    setAccion('Nuevo')
-    setdataSelect('')
-  }
+  const nuevoRegistro = () => {
+    SetopenRegistro(!openRegistro);
+    setAccion("Nuevo");
+    setdataSelect("");
+  };
   return (
     <Container>
       {openRegistro && (
@@ -77,6 +77,7 @@ export const CategoriesTemplate = ({ data }) => {
           )}
         </ContentFilters>
       </section>
+
       <section className="area2">
         <ContentFilter>
           <BtnFilter
@@ -87,8 +88,14 @@ export const CategoriesTemplate = ({ data }) => {
           />
         </ContentFilter>
       </section>
+      {/* Tabla */}
       <section className="main">
-        <TablaCategorias data={data} SetopenRegistro={SetopenRegistro} setdataSelect={setdataSelect} setAccion={setAccion}/>
+        <TablaCategorias
+          data={data}
+          SetopenRegistro={SetopenRegistro}
+          setdataSelect={setdataSelect}
+          setAccion={setAccion}
+        />
       </section>
     </Container>
   );
