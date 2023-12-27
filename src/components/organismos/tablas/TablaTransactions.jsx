@@ -1,20 +1,22 @@
-import React, { useEffect } from "react";
 import styled from "styled-components";
 import {
   ContentAccionesTabla,
   Paginacion,
-  useCategoriesStore,
+  useTranstactionsStore,
   v,
 } from "../../../index";
 import Swal from "sweetalert2";
 
-export const TablaCategorias = ({
+export const TablaTransactions = ({
   data,
   SetopenRegistro,
   setdataSelect,
   setAccion,
 }) => {
-  const { deleteCategories } = useCategoriesStore();
+  console.log(data)
+  
+  const {  deleteTransaction } = useTranstactionsStore();
+
   const eliminar = (p) => {
     Swal.fire({
       title: "¿estás seguro?",
@@ -26,8 +28,8 @@ export const TablaCategorias = ({
       confirmButtonText: "Si, eliminar",
     }).then( async (result) => {
       if (result.isConfirmed) {
-        await deleteCategories({ id: p.id, id_user: p.id_user });
-        // Swal.fire("Saved!", "", "success");
+        await deleteTransaction({ id: p.id });
+        Swal.fire("Transaction Delete!", "", "success");
       } else {
         Swal.fire("Changes are not saved", "", "info");
       }
@@ -44,34 +46,38 @@ export const TablaCategorias = ({
       <table className="responsive-table">
         <thead>
           <tr>
-            <th scope="col">Descripcion</th>
-            <th scope="col">Icono</th>
-            <th scope="col">Color</th>
-            <th scope="col">Acciones</th>
+            <th scope="col">Situación</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Cuenta</th>
+            <th scope="col">Valor</th>
+            <th scope="col">Accion</th>
           </tr>
         </thead>
         <tbody>
           {data?.map((item, index) => {
               return (
                 <tr key={item.id}>
-                  <th scope="row">{item.description}</th>
-                  <td data-title="Icono">{item.icono}</td>
-                  <td data-title="Color" className="Colordiv">
-                    <div className="ColorContent">
-                      <Colorcontent
-                        color={item.color}
-                        $alto="25px"
-                        $ancho="25px"
-                      />
-                    </div>
-                  </td>
-                  <td data-title="Acciones">
-                    <ContentAccionesTabla
-                      funcionEditar={() => editar(item)}
-                      funcionEliminar={() => eliminar(item)}
-                    />
-                  </td>
-                </tr>
+                <th scope="row">
+                  <Situacion
+                    $bgcolor={item.status == "1" ? "#69e673" : "#b3b3b3"}
+                  ></Situacion>
+                </th>
+                <td  data-title="Fecha" >{item.date}</td>
+                <td data-title="Descripcion" >
+                  {item.description}
+                </td>
+                <td data-title="Categoria" >{item.category}</td>
+                <td data-title="Cuenta">{item.account}</td>
+                <td data-title="Monto">{item.value_currency}</td>
+                <td data-title="Acciones" >
+                  <ContentAccionesTabla
+                    funcionEditar={() => editar(item)}
+                    funcionEliminar={() => eliminar(item)}
+                  />
+                </td>
+              </tr>
               );
             })}
         </tbody>
@@ -204,6 +210,10 @@ const Container = styled.div`
           border-bottom: 1px solid rgba(161, 161, 161, 0.32);
           text-align: center;
         }
+        
+      }
+      td[data-type="currency"] {
+        font-weight:600;
       }
       td[data-title]:before {
         content: attr(data-title);
@@ -227,4 +237,15 @@ const Colorcontent = styled.div`
   background-color: ${(props) => props.color};
   border-radius: 50%;
   text-align: center;
+`;
+const Situacion = styled.div`
+  display: flex;
+  justify-content: center;
+  &::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: ${(props) => props.$bgcolor};
+  }
 `;

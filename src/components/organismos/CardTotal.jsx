@@ -4,7 +4,7 @@ import { BtnCircular, useUsuariosStore, v } from "../../index";
 
 export const CardTotal = ({ color, total, title, icono }) => {
   const { datausuarios } = useUsuariosStore();
-  console.log(datausuarios);
+  // console.log(datausuarios);
   return (
     <Container>
       <div className="contentTextos">

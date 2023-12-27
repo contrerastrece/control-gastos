@@ -19,7 +19,7 @@ const Container = styled.div`
   justify-content: center;
   font-size: 2rem;
   cursor: pointer;
-
+  position:relative;
   span {
     display: flex;
     align-items: center;

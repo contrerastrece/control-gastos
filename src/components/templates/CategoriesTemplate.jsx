@@ -29,10 +29,10 @@ export const CategoriesTemplate = ({ data }) => {
     setState(false);
   };
 
-  const cerrarDesplegables = () => {
-    setStateType(false);
-    setState(false);
-  };
+  // const cerrarDesplegables = () => {
+  //   setStateType(false);
+  //   setState(false);
+  // };
   const openTipo = () => {
     setStateType(!stateType);
     setState(false);

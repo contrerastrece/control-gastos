@@ -10,11 +10,13 @@ import {
 
 export const useCategoriesStore = create((set, get) => ({
   dataCategories: [],
+  categoryItemSelect:[],
   parametros: {},
   showCategories: async (p) => {
     const response = await Mostrar_categorias(p);
     set({ parametros: p });
     set({ dataCategories: response });
+    set({ categoryItemSelect: response[0] });
 
     return response;
   },
@@ -41,4 +43,7 @@ export const useCategoriesStore = create((set, get) => ({
     const { showCategories } = get();
     set(showCategories(p));
   },
+  selectCategory: async(p)=>{
+    set({categoryItemSelect:p})
+  }
 }));

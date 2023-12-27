@@ -10,11 +10,12 @@ export default function BtnCerrar({funcion}) {
   )
 }
 const Container = styled.span`
+border:1px solid red;
   cursor: pointer;
   font-size: 25px;
   transition: all 0.2s;
   &:hover {
-    color: ${() => v.colorselector};
-    transform: scale(1.2);
+    /* color: ${() => v.colorselector}; */
+    transform: scale(1.1);
   }
 `;
