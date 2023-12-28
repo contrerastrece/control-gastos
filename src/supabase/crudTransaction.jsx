@@ -64,7 +64,11 @@ export const Eliminar_movimientos = async (p) => {
 
 export const Reporte_movimientos_anio_mes=async(p)=>{
   try {
-    const {data}=await supabase.rpc('',{})
+    const {data}=await supabase.rpc('report_transactionsmesanio',{ 
+      year_param: p.year,
+      month_param: p.month,
+      id_user_param: p.id_user,
+      type_category_param: p.type_category,})
     return data;
   } catch (error) {
     

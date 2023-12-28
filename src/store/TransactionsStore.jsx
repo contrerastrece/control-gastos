@@ -58,7 +58,7 @@ export const useTranstactionsStore = create((set, get) => ({
     set(showTransactions(params));
   },
   reportTransactionYearMonth: async (p) => {
-    const response = await Reporte_movimientos_anio_mes();
+    const response = await Reporte_movimientos_anio_mes(p);
     set({ dataReportTransactionYearMonth: response });
     return response;
   },

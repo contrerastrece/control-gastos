@@ -1,17 +1,20 @@
 import React from "react";
 import styled from "styled-components";
-import { LinksArray, SecondarylinksArray, SidebarCard, v } from "../../../index";
+import {
+  LinksArray,
+  SecondarylinksArray,
+  SidebarCard,
+  v,
+} from "../../../index";
 import { Link, NavLink } from "react-router-dom";
 
 const Sidebar = ({ state, setState }) => {
-
-  
   return (
-    <Main $isopen={state}>
-      <span className="SidebarButton" onClick={()=>setState(!state)}>
-        {<v.iconoflechaderecha/>}
+    <Main $isopen={state.toString()}>
+      <span className="SidebarButton" onClick={() => setState(!state)}>
+        {<v.iconoflechaderecha />}
       </span>
-      <Container $isopen={state} className={state?'active':''}>
+      <Container $isopen={state.toString()} className={state ? "active" : ""}>
         <div className="LogoContent">
           <div className="imgContent">
             <img src={v.logo} alt="" />
@@ -19,8 +22,14 @@ const Sidebar = ({ state, setState }) => {
           <h2>Vcontreras</h2>
         </div>
         {LinksArray.map(({ label, icon, to }) => (
-          <div className={state?'LinkContainer active':'LinkContainer'} key={label}>
-            <NavLink to={to} className={({isActive})=>`Links${isActive?' active':''}`}>
+          <div
+            className={state ? "LinkContainer active" : "LinkContainer"}
+            key={label}
+          >
+            <NavLink
+              to={to}
+              className={({ isActive }) => `Links${isActive ? " active" : ""}`}
+            >
               <div className="LinkIcon">{icon}</div>
               <span className={state ? "label_ver" : "label_oculto"}>
                 {label}
@@ -45,16 +54,15 @@ const Sidebar = ({ state, setState }) => {
             </NavLink>
           </div>
         ))}
-        <Divider/>
-        {state&&<SidebarCard/>}
+        <Divider />
+        {state && <SidebarCard />}
       </Container>
-
     </Main>
   );
 };
 
-const Container=styled.div`
-   color: ${(props) => props.theme.text};
+const Container = styled.div`
+  color: ${(props) => props.theme.text};
   background: ${(props) => props.theme.bg};
   position: fixed;
   padding-top: 20px;
@@ -69,7 +77,7 @@ const Container=styled.div`
     border-radius: 10px;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: ${(props)=>props.theme.colorScroll};
+    background-color: ${(props) => props.theme.colorScroll};
     border-radius: 10px;
   }
 
@@ -88,7 +96,8 @@ const Container=styled.div`
       width: 30px;
       cursor: pointer;
       transition: 0.3s ease;
-      transform: ${({ $isopen }) => ($isopen ? `scale(0.7)` : `scale(1.5)`)}
+      transform: ${({ $isopen }) =>
+          $isopen === "true" ? `scale(0.7)` : `scale(1.5)`}
         rotate(${({ theme }) => theme.logorotate});
       img {
         width: 100%;
@@ -96,7 +105,7 @@ const Container=styled.div`
       }
     }
     h2 {
-      display: ${({ $isopen }) => ($isopen ? `block` : `none`)};
+      display: ${({ $isopen }) => ($isopen === "true" ? `block` : `none`)};
     }
     @keyframes flotar {
       0% {
@@ -141,7 +150,7 @@ const Container=styled.div`
       }
       &.active {
         color: ${(props) => props.theme.bg5};
-        font-weight:600;
+        font-weight: 600;
         &::before {
           content: "";
           position: absolute;
@@ -156,13 +165,10 @@ const Container=styled.div`
     &.active {
       padding: 0;
     }
-  
   }
-
 `;
-
 const Main = styled.div`
-    .SidebarButton {
+  .SidebarButton {
     position: fixed;
     top: 70px;
     left: 42px;
@@ -179,18 +185,15 @@ const Main = styled.div`
     transition: all 0.2s;
     z-index: 2;
     transform: ${({ $isopen }) =>
-      $isopen ? `translateX(162px) rotate(3.142rad)` : `initial`};
+      $isopen === "true" ? `translateX(162px) rotate(3.142rad)` : `initial`};
     color: ${(props) => props.theme.text};
   }
-  
 `;
-
 const Divider = styled.div`
   height: 1px;
   width: 100%;
   background: ${(props) => props.theme.bg4};
   margin: ${() => v.lgSpacing} 0;
 `;
-
 
 export default Sidebar;

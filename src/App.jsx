@@ -43,11 +43,11 @@ if(isLoading){
         <ThemeProvider theme={themeStyle}>
           <AuthContextProvider>
             {pathname != "/login" ? (
-              <Container>
+              <Container className={sidebarOpen ? "active" : ""}>
                 <div className="ContentSidebar">
-                  <Sidebar state={sidebarOpen} setState={setSidebarOpen} />
+                  <Sidebar state={sidebarOpen} setState={() => setSidebarOpen(!sidebarOpen)} />
                 </div>
-                <div className="contentMenuHambur">
+                <div className="ContentMenuHambur">
                   <MenuHambur />
                 </div>
                 <ContainerBody>
@@ -68,25 +68,34 @@ if(isLoading){
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  background: ${(props) => props.theme.bgtotal};
+  background: ${({ theme }) => theme.bgtotal};
+  transition: all 0.2s ease-in-out;
+
 
   .ContentSidebar {
     display: none;
+    /* display:initial; */
   }
   .ContentMenuHambur {
-    display: block;
-    position: absolute;
+    /* display: none; */
     left: 20px;
+    display: block;
+    
   }
 
   @media ${Device.tablet} {
     grid-template-columns: 65px 1fr;
-
+    &.active {
+      grid-template-columns: 220px 1fr;
+    }
     .ContentSidebar {
       display: initial;
+      /* display:none */
     }
     .ContentMenuHambur {
-      display: none;
+      position: absolute;
+      left: 20px;
+      display: block;
     }
   }
 `;
